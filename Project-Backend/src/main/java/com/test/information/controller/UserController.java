@@ -25,8 +25,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/api/user/registration")
-    public ResponseEntity<?> register(@RequestBody User user){
-        if(userService.findByUsername(user.getUsername()) != null){
+    public ResponseEntity<?> register(@RequestBody User user) {
+        if (userService.findByUsername(user.getUsername()) != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         user.setRole(Role.USER);
@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @GetMapping("/api/user/login")
-    public ResponseEntity<?> login(Principal principal){
-        if(principal == null){
+    public ResponseEntity<?> login(Principal principal) {
+        if (principal == null) {
             return ResponseEntity.ok(principal);
         }
         UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) principal;

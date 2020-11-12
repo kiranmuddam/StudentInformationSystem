@@ -24,17 +24,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/api/user/registration")
+    @PostMapping("/api/user/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         if (userService.findByUsername(user.getUsername()) != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        user.setRole(Role.USER);
+        user.setRole(Role.ADMIN);
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping("/api/user/login")
     public ResponseEntity<?> login(Principal principal) {
+        System.out.println(principal);
         if (principal == null) {
             return ResponseEntity.ok(principal);
         }

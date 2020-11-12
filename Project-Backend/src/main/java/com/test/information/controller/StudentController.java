@@ -6,11 +6,11 @@ import com.test.information.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -40,6 +40,16 @@ public class StudentController {
     @GetMapping("/api/students/all")
     public ResponseEntity<?> allStudents() {
         return ResponseEntity.ok(studentRepository.findAll());
+    }
+
+
+
+    @DeleteMapping("/api/students/{id}")
+    public Map<String, Boolean> deleteStudent(@PathVariable(value = "id") Long id) throws Exception {
+        studentRepository.deleteById(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 
 }

@@ -11,4 +11,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByRollNumber(String rollNumber);
 
     Optional<Student> findByClassRoom(String classRoom);
+
+    Optional<Student> deleteByRollNumber(String rollNumber);
 }

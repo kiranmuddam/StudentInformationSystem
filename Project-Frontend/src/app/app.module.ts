@@ -15,6 +15,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CreateStudentComponent } from './components/admin/create-student/create-student.component';
 import { UpdateStudentComponent } from './components/admin/update-student/update-student.component';
+import { ListClassroomsComponent } from './components/admin/list-classrooms/list-classrooms.component';
+import { DetailClassroomComponent } from './components/admin/detail-classroom/detail-classroom.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { UpdateStudentComponent } from './components/admin/update-student/update
     UnathorizedComponent,
     CreateStudentComponent,
     UpdateStudentComponent,
+    ListClassroomsComponent,
+    DetailClassroomComponent,
   ],
   imports: [
     BrowserModule,

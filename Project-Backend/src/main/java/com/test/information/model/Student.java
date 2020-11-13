@@ -20,8 +20,8 @@ public class Student {
     private int age;
     @Column(nullable = true)
     private String gender;
-    @Column(nullable = false)
-    private String classRoom;
+    @ManyToOne
+    private Classroom classRoom;
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -73,11 +73,11 @@ public class Student {
         this.gender = gender;
     }
 
-    public String getClassRoom() {
+    public Classroom getClassRoom() {
         return classRoom;
     }
 
-    public void setClassRoom(String classRoom) {
+    public void setClassRoom(Classroom classRoom) {
         this.classRoom = classRoom;
     }
 

@@ -1,6 +1,8 @@
 package com.test.information;
 
+import com.test.information.model.Classroom;
 import com.test.information.model.Student;
+import com.test.information.repository.ClassroomRepository;
 import com.test.information.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class StudentRepositoryTests {
     private StudentRepository repo;
 
     @Autowired
+    private ClassroomRepository repo1;
+
+    @Autowired
     private TestEntityManager entityManager;
 
     @Test
@@ -29,14 +34,28 @@ public class StudentRepositoryTests {
         student.setEmail("kiraniiitn@gmail.com");
         student.setMobile("9398584586");
         student.setAge(20);
-        student.setClassRoom("cse1");
         student.setGender("male");
-
+        Classroom classroom = repo1.findByName("cse1");
+        student.setClassRoom(classroom);
         Student savedStudent = repo.save(student);
 
         Student existedStudent = entityManager.find(Student.class, savedStudent.getUserId());
 
         assertThat(existedStudent.getEmail()).isEqualTo(student.getEmail());
+
+    }
+
+    @Test
+    public void createClassRoom() {
+        Classroom classroom = new Classroom();
+        classroom.setName("cse4");
+        classroom.setClassTeacher("Joginder");
+
+        Classroom newClass = repo1.save(classroom);
+
+        Classroom existedClassRoom = entityManager.find(Classroom.class, newClass.getId());
+
+        assertThat(existedClassRoom.getName()).isEqualTo(classroom.getName());
 
     }
 }

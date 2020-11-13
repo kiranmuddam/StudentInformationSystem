@@ -1,5 +1,6 @@
 package com.test.information.repository;
 
+import com.test.information.model.Classroom;
 import com.test.information.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,7 +11,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Optional<Student> findByRollNumber(String rollNumber);
 
-    Optional<Student> findByClassRoom(String classRoom);
-
     Optional<Student> deleteByRollNumber(String rollNumber);
+
+    List<Student> findByClassRoom(Classroom classroom);
 }

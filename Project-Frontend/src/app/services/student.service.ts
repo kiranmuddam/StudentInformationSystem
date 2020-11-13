@@ -24,8 +24,8 @@ export class StudentService {
   }
 
 
-  getStudent(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${userId}`);
+  getClassStudents(name: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/classroom/${name}`, {headers: this.headers});
   }
 
   createStudent(students: Object): Observable<Object> {
@@ -40,8 +40,9 @@ export class StudentService {
     return this.http.delete(`${this.baseUrl}/${id}`, {headers: this.headers});
   }
 
-  getEmployeesList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+
+  getClassRooms(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/classrooms`, {headers: this.headers});
   }
 }
 

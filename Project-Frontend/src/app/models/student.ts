@@ -1,3 +1,5 @@
+import { ClassRoom } from './classroom';
+
 export class Student {
     userId: number;
     rollNumber: string="";
@@ -5,7 +7,7 @@ export class Student {
     lastName: string="";
     age: number;
     gender: string= "";
-    classRoom: string = "";
+    classRoom: ClassRoom;
     email: string = "";
     mobile: string = "";
     address : string = "";

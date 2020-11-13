@@ -33,13 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Cross-origin-resource-sharing
         http.cors().and()
                 .authorizeRequests()
-                //These are public pages.
-                .antMatchers("/resources/**", "/error", "/api/user/**").permitAll()
+                .antMatchers("/error", "/api/user/**").permitAll()
                 //These can be reachable for just have admin role.
-                .antMatchers("/api/admin/**", "/api/students/**").hasRole("ADMIN")
+                .antMatchers("/api/admin/**","/api/students/**").hasRole("ADMIN")
                 //all remaining paths should need authentication.
                 .anyRequest().fullyAuthenticated()
                 .and()
@@ -61,7 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    //Cross origin resource sharing.
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

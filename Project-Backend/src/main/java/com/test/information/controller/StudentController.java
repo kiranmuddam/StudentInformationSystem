@@ -1,17 +1,18 @@
 package com.test.information.controller;
 
+import com.test.information.model.Classroom;
 import com.test.information.model.Student;
+import com.test.information.repository.ClassroomRepository;
 import com.test.information.repository.StudentRepository;
 import com.test.information.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 public class StudentController {
@@ -20,6 +21,9 @@ public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private ClassroomRepository classroomRepository;
 
     @PostMapping("/api/students/add")
     public ResponseEntity<?> addStudent(@RequestBody Student student) {
@@ -42,6 +46,12 @@ public class StudentController {
         return ResponseEntity.ok(studentRepository.findAll());
     }
 
+    @GetMapping("/api/students/classrooms")
+    public ResponseEntity<?> allClassRooms() {
+        return ResponseEntity.ok(classroomRepository.findAll());
+    }
+
+
 
 
     @DeleteMapping("/api/students/{id}")
@@ -50,6 +60,13 @@ public class StudentController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @GetMapping("/api/students/classroom/{name}")
+    public List<Student> getClassroomStudents(@PathVariable(value = "name") String name) throws Exception {
+        Classroom myClass = classroomRepository.findByName(name);
+        List<Student> classStudents = studentRepository.findByClassRoom(myClass);
+        return classStudents;
     }
 
 }

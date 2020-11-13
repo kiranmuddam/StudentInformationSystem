@@ -13,6 +13,8 @@ import { UpdateStudentComponent } from './components/admin/update-student/update
 
 import {AuthGuard} from './guards/auth.guard';
 import {Role} from './models/role';
+import { ListClassroomsComponent } from './components/admin/list-classrooms/list-classrooms.component';
+import { DetailClassroomComponent } from './components/admin/detail-classroom/detail-classroom.component';
 
 const routes: Routes = [
   //public pages
@@ -27,6 +29,11 @@ const routes: Routes = [
   },
   {path:'student/:rollNumber',
   component:DetailComponent,
+  canActivate: [AuthGuard],
+  data: {roles: [Role.ADMIN]}
+  },
+  {path:'classroom/:name',
+  component:DetailClassroomComponent,
   canActivate: [AuthGuard],
   data: {roles: [Role.ADMIN]}
   },
@@ -45,9 +52,14 @@ const routes: Routes = [
   canActivate: [AuthGuard],
   data: {roles: [Role.ADMIN]}
   },
+  {path:'classrooms',
+  component: ListClassroomsComponent,
+  canActivate: [AuthGuard],
+  data: {roles: [Role.ADMIN]}
+  },
   //public error pages.
-  {path:'404', component: NotFoundComponent},
-  {path:'401', component: UnathorizedComponent}
+  {path:'error/404', component: NotFoundComponent},
+  {path:'error/401', component: UnathorizedComponent}
 ];
 
 @NgModule({
@@ -58,7 +70,7 @@ export class AppRoutingModule {
 constructor(private router: Router) {
   //For unkhown pages
   this.router.errorHandler = (error: any) => {
-    this.router.navigate(['/404']);
+    this.router.navigate(['error/404']);
   }
 }
 }

@@ -23,10 +23,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of userList; index as ind">
-              <th scope="row">{{ item.userId }}</th>
+              <th scope="row">{{ ind + 1 }}</th>
               <td>{{ item.firstName + " " + item.lastName }}</td>
               <td>{{item.rollNumber}}</td>
-              <td>{{item.classRoom}}</td>
+              <td>{{item.classRoom.name}}</td>
               <td>{{item.gender}}</td>
               <td><button class="btn btn-info" (click)="detail(item)">Detail</button> &nbsp;
                 <button routerLink="/student/update/{{item.rollNumber}}" class="btn btn-success">Update</button> &nbsp;

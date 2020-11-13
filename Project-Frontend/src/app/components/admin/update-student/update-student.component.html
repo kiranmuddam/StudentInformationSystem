@@ -23,11 +23,16 @@
       </div>
 
 
-      <div class="form-group">
+    <div>
       <label for="name">Class Room</label>
-      <input type="text" class="form-control" id="classRoom" required [(ngModel)]="student.classRoom" name="classRoom">
-    </div>
-
+    <select class="form-control" name="classRoom" 
+ [(ngModel)]="student.classRoom" required>
+        <option *ngFor="let currentClass of ClassRooms" [ngValue]= "currentClass">
+          {{currentClass.name}}
+        </option> 
+  </select>
+</div>
+<br>
     <div class="form-group">
         <label><input type="radio" name="gender" value="male"  [(ngModel)] = "student.gender">&nbsp;Male&nbsp;&nbsp;&nbsp;</label>
         <label><input type="radio" name="gender" value="female"  [(ngModel)] = "student.gender">&nbsp;Female</label>

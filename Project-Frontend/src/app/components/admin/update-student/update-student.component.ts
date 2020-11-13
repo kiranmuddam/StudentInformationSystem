@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClassRoom } from 'src/app/models/classroom';
 import { Student } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
 
@@ -12,11 +13,19 @@ export class UpdateStudentComponent implements OnInit {
 
   student: Student = new Student();
   submitted = false;
+  ClassRooms: Array<ClassRoom>;
 
   constructor(private studentService: StudentService,
     private router: Router) { }
 
   ngOnInit() {
+    this.findAllClassRooms();
+  }
+  findAllClassRooms(){
+    this.studentService.getClassRooms().subscribe(data => {
+      this.ClassRooms = data;
+      console.log(this.ClassRooms);
+    });
   }
 
   updateStudent(): void {
@@ -25,6 +34,7 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   save() {
+    console.log(this.student);
     this.studentService
     .updateStudent(this.student).subscribe(data => {
       console.log(data)
@@ -42,5 +52,4 @@ export class UpdateStudentComponent implements OnInit {
   gotoList() {
     this.router.navigate(['/students']);
   }
-
 }

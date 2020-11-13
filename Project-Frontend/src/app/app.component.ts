@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'client-user-management';
+  title = 'Student-Information-System';
   currentUser: User;
 
   constructor(private userService: UserService, private router: Router){

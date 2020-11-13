@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="user-container">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col col-xs-6">
+            </div>
+          </div>
+        </div>
+  
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Roll Number</th>
+                <th scope="col">Class Room</th>
+                <th scope="col">Gender</th>
+                <th scope="col">All Options</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of allClassStudents; index as ind">
+                <th scope="row">{{ ind + 1 }}</th>
+                <td>{{ item.firstName + " " + item.lastName }}</td>
+                <td>{{item.rollNumber}}</td>
+                <td>{{item.classRoom.name}}</td>
+                <td>{{item.gender}}</td>
+                <td><button class="btn btn-info" (click)="detail(item)">Detail</button> &nbsp;
+                  <button routerLink="/student/update/{{item.rollNumber}}" class="btn btn-success">Update</button> &nbsp;
+                  <button class="btn btn-danger" (click)="deleteStudent(item.userId)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

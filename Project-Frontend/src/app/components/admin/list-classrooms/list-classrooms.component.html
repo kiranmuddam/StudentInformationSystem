@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="user-container">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col col-xs-6">
+            </div>
+          </div>
+        </div>
+  
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Class Name</th>
+                <th scope="col">Class Teacher</th>
+                <th scope="col">All Options</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of classList; index as ind">
+                <th scope="row">{{ ind + 1 }}</th>
+                <td>{{ item.name  }}</td>
+                <td>{{item.classTeacher}}</td>
+                <td><button class="btn btn-info" (click)="detail(item)">List All Students</button> &nbsp;
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

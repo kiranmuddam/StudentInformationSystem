@@ -27,7 +27,7 @@ const routes: Routes = [
   canActivate: [AuthGuard],
   data: {roles: [Role.USER, Role.ADMIN]}
   },
-  {path:'student/:rollNumber',
+  {path:'student/:userId',
   component:DetailComponent,
   canActivate: [AuthGuard],
   data: {roles: [Role.ADMIN]}
@@ -42,7 +42,7 @@ const routes: Routes = [
   canActivate: [AuthGuard],
   data: {roles: [Role.ADMIN]}
   },
-  {path:'student/update/:rollNumber',
+  {path:'student/update/:userId',
   component:UpdateStudentComponent,
   canActivate: [AuthGuard],
   data: {roles: [Role.ADMIN]}

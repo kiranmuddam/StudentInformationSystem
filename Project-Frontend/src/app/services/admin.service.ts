@@ -22,6 +22,6 @@ export class AdminService {
   }
 
   findAllStudents(): Observable<any> {
-    return this.http.get(API_URL + "all", {headers: this.headers});
+    return this.http.get(API_URL , {headers: this.headers});
   }
 }

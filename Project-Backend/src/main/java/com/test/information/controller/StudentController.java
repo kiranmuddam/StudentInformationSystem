@@ -8,6 +8,7 @@ import com.test.information.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -25,25 +26,27 @@ public class StudentController {
     @Autowired
     private ClassroomRepository classroomRepository;
 
-    @PostMapping("/api/students/add")
-    public ResponseEntity<?> addStudent(@RequestBody Student student) {
+    @GetMapping("/api/students")
+    public ResponseEntity<?> allStudents() {
+        return ResponseEntity.ok(studentRepository.findAll());
+    }
+
+    @PostMapping("/api/students")
+    public ResponseEntity<?> createStudent(@RequestBody Student student) throws Exception {
         if (studentRepository.findByRollNumber(student.getRollNumber()).isPresent()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(studentRepository.save(student), HttpStatus.CREATED);
     }
 
-    @PostMapping("/api/students/update")
-    public ResponseEntity<?> updateStudent(@RequestBody Student student) {
-        if (!studentRepository.findByRollNumber(student.getRollNumber()).isPresent()) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-        return new ResponseEntity<>(studentRepository.save(student), HttpStatus.CREATED);
-    }
+    @PutMapping("/api/students/{id}")
+    public ResponseEntity<Student> upStudent(@PathVariable(value = "id") Long studentId,
+                                                   @Validated @RequestBody Student studentDetails) throws Exception {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new Exception("Student Not Found :: " + studentId));
 
-    @GetMapping("/api/students/all")
-    public ResponseEntity<?> allStudents() {
-        return ResponseEntity.ok(studentRepository.findAll());
+        final Student updatedStudent = studentRepository.save(student);
+        return ResponseEntity.ok(updatedStudent);
     }
 
     @GetMapping("/api/students/classrooms")
@@ -51,8 +54,10 @@ public class StudentController {
         return ResponseEntity.ok(classroomRepository.findAll());
     }
 
-
-
+    @GetMapping("/api/students/{id}")
+    public ResponseEntity<?> getStudent(@PathVariable(value = "id") Long id) throws Exception {
+        return ResponseEntity.ok(studentRepository.findById(id));
+    }
 
     @DeleteMapping("/api/students/{id}")
     public Map<String, Boolean> deleteStudent(@PathVariable(value = "id") Long id) throws Exception {

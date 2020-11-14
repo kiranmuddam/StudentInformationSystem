@@ -1,6 +1,6 @@
 <h3>Update Student</h3>
 <div [hidden]="submitted" style="width: 400px;">
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" ngNativeValidate>
     <div class="form-group">
         <label for="name">Roll Nuber</label>
         <input type="text" class="form-control" id="rollNumber" required [(ngModel)]="student.rollNumber" name="rollNumber">

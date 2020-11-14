@@ -9,8 +9,7 @@ import { User } from '../models/user';
 export class StudentService {
 
   private baseUrl = 'http://localhost:8080/api/students';
-  private createUrl = 'http://localhost:8080/api/students/add';
-  private updateUrl = 'http://localhost:8080/api/students/update';
+
 
   currentUser: User;
   headers: HttpHeaders;
@@ -29,11 +28,11 @@ export class StudentService {
   }
 
   createStudent(students: Object): Observable<Object> {
-    return this.http.post(`${this.createUrl}`, students, {headers: this.headers});
+    return this.http.post(`${this.baseUrl}`, students, {headers: this.headers});
   }
 
-  updateStudent(students: Object): Observable<Object> {
-    return this.http.post(`${this.updateUrl}`, students, {headers: this.headers});
+  updateStudent(userId: string, students: Object): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/${userId}`, students, {headers: this.headers});
   }
 
   deleteStudent(id: number): Observable<any> {

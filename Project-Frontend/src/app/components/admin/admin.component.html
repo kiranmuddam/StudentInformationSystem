@@ -29,7 +29,7 @@
               <td>{{item.classRoom.name}}</td>
               <td>{{item.gender}}</td>
               <td><button class="btn btn-info" (click)="detail(item)">Detail</button> &nbsp;
-                <button routerLink="/student/update/{{item.rollNumber}}" class="btn btn-success">Update</button> &nbsp;
+                <button routerLink="/student/update/{{item.userId}}" class="btn btn-success">Update</button> &nbsp;
                 <button class="btn btn-danger" (click)="deleteStudent(item.userId)">Delete</button>
               </td>
             </tr>

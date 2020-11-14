@@ -38,7 +38,7 @@ export class AdminComponent implements OnInit {
 
   detail(student: Student) {
     localStorage.setItem("detailStudent", JSON.stringify(student));
-    this.router.navigate(['/student', student.rollNumber]);
+    this.router.navigate(['/student', student.userId]);
   }
 
 }
